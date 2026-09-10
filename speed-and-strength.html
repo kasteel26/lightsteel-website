@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="/favicon.png">
 <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
@@ -15,7 +16,7 @@
 
 <header class="hdr">
   <div class="hdr-in">
-    <a class="brand" href="/">LIGHTSTEEL</a>
+    <a class="brand" href="/"><img src="/logo-lightsteel-white.png" alt="Lightsteel Elite Hockey" width="224" height="52"></a>
     <nav class="nav" aria-label="Main">
       <div class="drop">
         <button type="button" aria-haspopup="true" style="color:#fff;border-bottom-color:var(--red)">Programs</button>
@@ -154,5 +155,30 @@
   <p class="legal">© <span id="yr">2026</span> Lightsteel Hockey. Langley, British Columbia.</p>
 </footer>
 <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>
+document.querySelectorAll('.drop').forEach(function (d) {
+  var btn = d.querySelector('button');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var open = d.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});
+document.addEventListener('click', function () {
+  document.querySelectorAll('.drop.open').forEach(function (d) {
+    d.classList.remove('open');
+    d.querySelector('button').setAttribute('aria-expanded', 'false');
+  });
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.drop.open').forEach(function (d) {
+      d.classList.remove('open');
+      d.querySelector('button').setAttribute('aria-expanded', 'false');
+    });
+  }
+});
+</script>
 </body>
 </html>

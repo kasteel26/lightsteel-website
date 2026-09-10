@@ -17,7 +17,8 @@
 <header class="hdr">
   <div class="hdr-in">
     <a class="brand" href="/"><img src="/logo-lightsteel-white.png" alt="Lightsteel Elite Hockey" width="224" height="52"></a>
-    <nav class="nav" aria-label="Main">
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="sitenav"><span></span><span></span><span></span></button>
+      <nav class="nav" id="sitenav" aria-label="Main">
       <div class="drop">
         <button type="button" aria-haspopup="true" style="color:#fff;border-bottom-color:var(--red)">Programs</button>
         <div class="drop-menu">
@@ -26,8 +27,8 @@
           <a href="/camps">Camps<span>A real jump in a short window</span></a>
         </div>
       </div>
-      <a href="/how-we-train" class="hide-sm">How We Train</a>
-      <a href="/our-story" class="hide-sm">Our Story</a>
+      <a href="/how-we-train">How We Train</a>
+      <a href="/our-story">Our Story</a>
       <a class="btn btn-sm" href="https://goteamup.com/p/12581119-lightsteel-hockey/">Book Your Lesson</a>
     </nav>
   </div>
@@ -186,29 +187,38 @@
 </footer>
 <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
 <script>
-document.querySelectorAll('.drop').forEach(function (d) {
-  var btn = d.querySelector('button');
-  btn.setAttribute('aria-expanded', 'false');
-  btn.addEventListener('click', function (e) {
+(function () {
+  var nav = document.getElementById('sitenav');
+  var burger = document.querySelector('.menu-btn');
+
+  burger.addEventListener('click', function (e) {
     e.stopPropagation();
-    var open = d.classList.toggle('open');
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    var open = nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
-});
-document.addEventListener('click', function () {
-  document.querySelectorAll('.drop.open').forEach(function (d) {
-    d.classList.remove('open');
-    d.querySelector('button').setAttribute('aria-expanded', 'false');
+
+  document.querySelectorAll('.drop').forEach(function (d) {
+    var b = d.querySelector('button');
+    b.setAttribute('aria-expanded', 'false');
+    b.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = d.classList.toggle('open');
+      b.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
   });
-});
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape') {
+
+  function closeAll() {
+    nav.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
     document.querySelectorAll('.drop.open').forEach(function (d) {
       d.classList.remove('open');
       d.querySelector('button').setAttribute('aria-expanded', 'false');
     });
   }
-});
+  document.addEventListener('click', closeAll);
+  nav.addEventListener('click', function (e) { e.stopPropagation(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
+})();
 </script>
 </body>
 </html>

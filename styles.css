@@ -2,8 +2,8 @@
    Edit colours, type and spacing here once; every page picks it up. */
 
 :root {
-  --red: #c8102e;
-  --red-accent: #e2687f;
+  --red: #ff0000;
+  --red-accent: #ff0000;
   --dark: #151515;
   --dark-2: #1e1e1e;
   --light: #f2f1ec;
@@ -111,7 +111,7 @@ a { color: inherit; }
   text-decoration: none; font-size: 15px; font-weight: 600;
   padding: 12px 22px; border-radius: 4px; white-space: nowrap;
 }
-.btn:hover { background: #a80d26; }
+.btn:hover { background: #d40000; }
 .btn-ghost {
   background: transparent; border: 1px solid #5a5a5a; color: #fff;
 }
